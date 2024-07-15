@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Filament\Resources\MasterHargaResource\Pages;
+
+use App\Filament\Resources\MasterHargaResource;
+use Filament\Actions;
+use Filament\Resources\Pages\ListRecords;
+
+class ListMasterHargas extends ListRecords
+{
+    protected static string $resource = MasterHargaResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\CreateAction::make(),
+        ];
+    }
+}

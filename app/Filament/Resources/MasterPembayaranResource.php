@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
-use App\Models\Category;
+use App\Filament\Resources\MasterPembayaranResource\Pages;
+use App\Filament\Resources\MasterPembayaranResource\RelationManagers;
+use App\Models\MasterPembayaran;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,37 +12,33 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\Select;
 
-
-class CategoryResource extends Resource
+class MasterPembayaranResource extends Resource
 {
-    protected static ?string $model = Category::class;
+    protected static ?string $model = MasterPembayaran::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'List Pembayaran';
 
-    protected static ?string $navigationLabel = 'Kategori';
     protected static ?string $navigationGroup = 'Master';
-
-
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-
-                Forms\Components\TextInput::make('klasifikasi')
-                    ->label('Klasifikasi')
-                    ->required()
-                    ->numeric()
-                    ->prefix('Rp.'),
-                Forms\Components\TextInput::make('kategori')
-                    ->label('Kategori')
+                //
+                Forms\Components\TextInput::make('metode_bayar')
+                    ->label('Metode Bayar')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('keterangan')
+                Forms\Components\TextInput::make('add_fee')
+                    ->label('Tambahan Biaya')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextArea::make('keterangan')
                     ->label('Keterangan')
-                    ->required(),
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -51,8 +47,8 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 //
-                Tables\Columns\TextColumn::make('klasifikasi')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('kategori')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('metode_bayar')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('add_fee')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('keterangan'),
             ])
             ->filters([
@@ -78,11 +74,9 @@ class CategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCategories::route('/'),
-            'create' => Pages\CreateCategory::route('/create'),
-            'edit' => Pages\EditCategory::route('/{record}/edit'),
-            'custom' => Pages\CategoryCustom::route('/custom'),
-
+            'index' => Pages\ListMasterPembayarans::route('/'),
+            'create' => Pages\CreateMasterPembayaran::route('/create'),
+            'edit' => Pages\EditMasterPembayaran::route('/{record}/edit'),
         ];
     }
 }
