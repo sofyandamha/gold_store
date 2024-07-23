@@ -31,11 +31,13 @@ class CategoryResource extends Resource
         return $form
             ->schema([
 
-                Forms\Components\TextInput::make('klasifikasi')
+                Forms\Components\Select::make('klasifikasi')
                     ->label('Klasifikasi')
-                    ->required()
-                    ->numeric()
-                    ->prefix('Rp.'),
+                    ->native(false)
+                    ->options([
+                        'Emas Murni' => 'Emas Murni',
+                        'Emas Perhiasan' => 'Emas Perhiasan',
+                    ]),
                 Forms\Components\TextInput::make('kategori')
                     ->label('Kategori')
                     ->required()

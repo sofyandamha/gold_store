@@ -37,6 +37,10 @@ class MasterHargaResource extends Resource
                     ->required()
                     ->numeric()
                     ->prefix('Rp.'),
+                Forms\Components\Select::make('category_id')
+                    ->label('Kategori')
+                    ->relationship('category', 'kategori')
+                    ->required()
             ]);
     }
 
@@ -47,6 +51,8 @@ class MasterHargaResource extends Resource
                 //
                 Tables\Columns\TextColumn::make('hrg_jual')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('hrg_beli')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('category.kategori')->label('Kategori'),
+
             ])
             ->filters([
                 //

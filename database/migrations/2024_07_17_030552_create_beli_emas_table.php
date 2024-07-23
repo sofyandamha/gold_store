@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('master_emas', function (Blueprint $table) {
+        Schema::create('beli_emas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('kd_barang', 25);
-            $table->string('nm_barang', 100);
+            $table->string('no_trans',50);
+            $table->unsignedBigInteger('customer_id');
+            $table->string('metode_pembayaran',100);
+            $table->string('bukti_pembayaran',100);
+            $table->decimal('berat', 5, 2);
+            $table->decimal('kadar_emas', 5, 2);
             $table->unsignedBigInteger('category_id');
-            $table->integer('karat');
-            $table->integer('berat_modal');
-            $table->decimal('harga_modal', 12,2)->nullable();
+            $table->decimal('keterangan_berat', 5, 2);
+            $table->foreign('customer_id')->references('id')->on('master_customers')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('master_emas');
+        Schema::dropIfExists('beli_emas');
     }
 };
