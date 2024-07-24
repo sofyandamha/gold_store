@@ -34,10 +34,14 @@ class BeliEmasResource extends Resource
                     ->label('Customer')
                     ->relationship('customer', 'nm_customer')
                     ->required(),
-                Forms\Components\TextArea::make('metode_pembayaran')
+                Forms\Components\Select::make('metode_pembayaran')
                     ->label('Metode Pembayaran')
-                    ->required()
-                    ->maxLength(255),
+                    ->default('Cash')
+                    ->native(false)
+                    ->options([
+                        'Cash' => 'Cash/Tunai',
+                        'Transfer' => 'Transfer',
+                    ]),
                 Forms\Components\TextInput::make('bukti_pembayaran')
                     ->label('Bukti Pembayaran')
                     ->maxLength(255),
