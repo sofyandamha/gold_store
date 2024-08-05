@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class MasterEmas extends Model
 {
@@ -19,8 +20,8 @@ class MasterEmas extends Model
         'harga_modal'
     ];
 
-    public function category()
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class)->select('id', 'kategori');
+        return $this->belongsTo(Category::class);
     }
 }

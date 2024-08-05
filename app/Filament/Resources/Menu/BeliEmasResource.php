@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
+use Illuminate\Database\Eloquent\Model;
 
 class BeliEmasResource extends Resource
 {
@@ -42,9 +43,9 @@ class BeliEmasResource extends Resource
                         'Cash' => 'Cash/Tunai',
                         'Transfer' => 'Transfer',
                     ]),
-                Forms\Components\TextInput::make('bukti_pembayaran')
+                FileUpload::make('bukti_pembayaran')
                     ->label('Bukti Pembayaran')
-                    ->maxLength(255),
+                    ->required(),
                 Forms\Components\TextInput::make('berat')
                     ->label('Berat')
                     ->required()
@@ -53,9 +54,15 @@ class BeliEmasResource extends Resource
                     ->label('Kadar Emas')
                     ->required()
                     ->numeric(),
-                Forms\Components\Select::make('category_id')
+                Forms\Components\Select::make('masterharga_id')
                     ->label('Harga Sekarang')
-                    ->relationship('category.harga', 'hrg_beli')
+                    ->relationship(
+                        name: 'masterharga',
+                        titleAttribute: 'Kategori'
+                    )
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->category->kategori} ($record->hrg_beli)")
+
+
                     ->required(),
                 Forms\Components\TextInput::make('keterangan_berat')
                     ->label('Keterangan Berat')
@@ -71,7 +78,7 @@ class BeliEmasResource extends Resource
                 //
                 Tables\Columns\TextColumn::make('no_trans')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('customer.nm_customer')->label('Customer'),
-                Tables\Columns\TextColumn::make('category.kategori')->label('Kategori'),
+                Tables\Columns\TextColumn::make('masterharga.category.kategori')->label('Kategori'),
                 Tables\Columns\TextColumn::make('berat'),
                 Tables\Columns\TextColumn::make('kadar_emas'),
                 Tables\Columns\TextColumn::make('keterangan_berat'),

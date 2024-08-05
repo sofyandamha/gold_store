@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('bukti_pembayaran',100);
             $table->decimal('berat', 5, 2);
             $table->decimal('kadar_emas', 5, 2);
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('masterharga_id');
             $table->decimal('keterangan_berat', 5, 2);
             $table->foreign('customer_id')->references('id')->on('master_customers')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('masterharga_id')->references('id')->on('master_hargas')->onDelete('cascade');
             $table->timestamps();
         });
     }

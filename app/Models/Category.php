@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\MasterHarga;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
@@ -16,8 +17,16 @@ class Category extends Model
         'keterangan',
     ];
 
-    public function harga()
+
+    public function harga(): HasMany
     {
-        return $this->belongsTo(MasterHarga::class)->select('id', 'hrg_jual','hrg_beli');
+        return $this->HasMany(MasterHarga::class);
     }
+
+    public function masteremas(): HasMany
+    {
+        return $this->HasMany(MasterHarga::class);
+    }
+
+
 }
