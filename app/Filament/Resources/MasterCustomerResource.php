@@ -38,7 +38,7 @@ class MasterCustomerResource extends Resource
                     ->label('No Hp.')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextArea::make('address')
+                Forms\Components\Textarea::make('address')
                     ->label('Alamat')
                     ->required()
                     ->maxLength(255),

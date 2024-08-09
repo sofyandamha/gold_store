@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('reparasis', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('no_nota',50);
+            $table->string('no_nota',50)->nullable();
             $table->string('tipe_reparasi',50);
             $table->string('nama_barang',100);
             $table->decimal('berat_kotor', 8, 2);
