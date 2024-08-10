@@ -18,6 +18,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -55,7 +56,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentBackgroundsPlugin::make()
-                ->showAttribution(false)
+                ->showAttribution(false),
+                // ->imageProvider(
+                //     MyImages::make()
+                //         ->directory('images/bg-gold.jpg')
+                // ),
             ])
             ->authMiddleware([
                 Authenticate::class,
