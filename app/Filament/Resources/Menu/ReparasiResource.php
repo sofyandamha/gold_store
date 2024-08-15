@@ -14,6 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class ReparasiResource extends Resource
 {
@@ -99,12 +100,20 @@ class ReparasiResource extends Resource
                 Tables\Columns\TextColumn::make('tipe_reparasi')->label('Tipe Reparasi')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('nama_barang')->label('Nama Barang')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('berat_kotor')->label('Berat Kotor'),
-                Tables\Columns\BadgeColumn::make('biaya_reparasi')->label('Biaya Reparasi')->color(static function ($state): string {
-                    if ($state === 0) {
-                        return 'success';
+                Tables\Columns\TextColumn::make('biaya_reparasi')->label('Biaya Reparasi')
+                ->formatStateUsing(static function ($state): string {
+                    if ($state == 0) {
+                        $state = 'Gratis';
+                        return $state;
+                     }
+                    return $state;
+                })
+                ->badge()
+                ->color(static function ($state): string {
+                    if ($state == 0) {
+                        return 'info';
                     }
-
-                    return 'secondary';
+                    return $state;
                 }),
                 Tables\Columns\TextColumn::make('status_diambil')->label('Status Diambil')->sortable()->searchable(),
                 Tables\Columns\BadgeColumn::make('status_pembayaran')
@@ -140,5 +149,9 @@ class ReparasiResource extends Resource
             'create' => Pages\CreateReparasi::route('/create'),
             'edit' => Pages\EditReparasi::route('/{record}/edit'),
         ];
+    }
+
+    public function status(){
+        return 'gratis';
     }
 }

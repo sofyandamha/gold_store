@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\MasterPembayaranResource\Pages;
+namespace App\Filament\Resources\Menu\PembayaranSupplierResource\Pages;
 
-use App\Filament\Resources\MasterPembayaranResource;
+use App\Filament\Resources\Menu\PembayaranSupplierResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListMasterPembayarans extends ListRecords
+class ListPembayaranSuppliers extends ListRecords
 {
-    protected static string $resource = MasterPembayaranResource::class;
+    protected static string $resource = PembayaranSupplierResource::class;
 
     protected function getHeaderActions(): array
     {
