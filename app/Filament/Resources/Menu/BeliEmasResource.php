@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class BeliEmasResource extends Resource
 {
@@ -29,8 +30,8 @@ class BeliEmasResource extends Resource
                 //
                 Forms\Components\TextInput::make('no_trans')
                     ->label('No Transaksi')
-                    ->required()
-                    ->maxLength(255),
+
+                    ->default('TRX-'.Carbon::now()->format('ymdhs')),
                 Forms\Components\Select::make('customer_id')
                     ->label('Customer')
                     ->relationship('customer', 'nm_customer')
