@@ -7,6 +7,7 @@ use App\Filament\Resources\Menu\JualEmasResource\RelationManagers;
 use App\Models\JualEmas;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Repeater;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
-
+use Carbon\Carbon;
 
 class JualEmasResource extends Resource
 {
@@ -27,31 +28,37 @@ class JualEmasResource extends Resource
         return $form
             ->schema([
                 //
-                Forms\Components\TextInput::make('no_trans')
-                    ->label('No Transaksi')
-                    ->required()
-                    ->unique(ignoreRecord: true)
-                    ->maxLength(50),
-                Forms\Components\Select::make('customer_id')
-                    ->label('Customer')
-                    ->relationship('customer', 'nm_customer')
-                    ->required(),
-                Forms\Components\Select::make('masteremas_id')
-                    ->label('Kode Barang')
-                    ->relationship('masteremas', 'kd_barang')
-                    ->required(),
-                Forms\Components\TextInput::make('discount')
-                    ->label('Diskon')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('metode_pembayaran')
-                    ->label('Metode Pembayaran')
-                    ->required()
-                    ->default('Cash')
-                    ->maxLength(255),
-                FileUpload::make('bukti_pembayaran')
-                    ->label('Bukti Pembayaran')
-                    ->required(),
+                Repeater::make('jualemas')
+                    ->label('Jual Emas')
+                    ->schema([
+                        Forms\Components\TextInput::make('no_trans')
+                            ->label('No Transaksi')
+                            ->required()
+                            ->default('TRX-'.Carbon::now()->format('ymdhs')),
+                        Forms\Components\Select::make('customer_id')
+                            ->label('Customer')
+                            ->relationship('customer', 'nm_customer')
+                            ->required(),
+                        Forms\Components\Select::make('masteremas_id')
+                            ->label('Kode Barang')
+                            ->relationship('masteremas', 'kd_barang')
+                            ->required(),
+                        Forms\Components\TextInput::make('discount')
+                            ->label('Diskon')
+                            ->required()
+                            ->numeric(),
+                        Forms\Components\Select::make('metode_pembayaran')
+                            ->label('Metode Pembayaran')
+                            ->relationship('masterpembayarans', 'metode_bayar')
+                            ->required(),
+                        FileUpload::make('bukti_pembayaran')
+                            ->label('Bukti Pembayaran'),
+                    ])
+                    ->addActionLabel('Tambah Data')
+                    ->columns(4)
+                    ->columnSpanFull(),
+
+
 
             ]);
     }
@@ -66,6 +73,8 @@ class JualEmasResource extends Resource
                 Tables\Columns\TextColumn::make('masteremas.kd_barang')->label('Kode Barang'),
                 Tables\Columns\TextColumn::make('discount'),
                 Tables\Columns\TextColumn::make('metode_pembayaran')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('masterpembayarans.metode_bayar')->label('Metode Pembayaran'),
+
                 ImageColumn::make('bukti_pembayaran')->square(),
 
             ])

@@ -9,6 +9,8 @@ use Filament\Resources\Pages\ListRecords;
 class ListReparasis extends ListRecords
 {
     protected static string $resource = ReparasiResource::class;
+    protected static ?string $title = 'Reparasi';
+
 
     protected function getHeaderActions(): array
     {

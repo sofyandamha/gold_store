@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\MasterCustomer;
 use App\Models\MasterEmas;
+use App\Models\MasterPembayaran;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class JualEmas extends Model
@@ -28,5 +29,9 @@ class JualEmas extends Model
     public function masteremas(): BelongsTo
     {
         return $this->belongsTo(MasterEmas::class);
+    }
+    public function masterpembayarans(): BelongsTo
+    {
+        return $this->belongsTo(MasterPembayaran::class);
     }
 }

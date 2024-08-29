@@ -15,8 +15,12 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('nm_customer', 100);
             $table->integer('no_hp');
+            $table->integer('no_hp2')->nullable();
+            $table->integer('no_hp3')->nullable();
             $table->text('address');
             $table->date('tgl_lahir');
+            $table->string('bank', 50);
+            $table->string('atas_nama', 100);
             $table->bigInteger('no_rekening')->default(20);
             $table->bigInteger('point_member')->default(12);
             $table->timestamps();

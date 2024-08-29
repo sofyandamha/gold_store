@@ -38,6 +38,12 @@ class MasterCustomerResource extends Resource
                     ->label('No Hp.')
                     ->required()
                     ->numeric(),
+                Forms\Components\TextInput::make('no_hp2')
+                    ->label('No Hp (Optional)')
+                    ->numeric(),
+                Forms\Components\TextInput::make('no_hp3')
+                    ->label('No Hp (Optional)')
+                    ->numeric(),
                 Forms\Components\Textarea::make('address')
                     ->label('Alamat')
                     ->required()
@@ -46,6 +52,12 @@ class MasterCustomerResource extends Resource
                     ->label('Tanggal Lahir')
                     ->native(false),
                     // ->displayFormat('dd/mm/YYYY'),
+                Forms\Components\TextInput::make('bank')
+                    ->label('Nama Bank')
+                    ->maxLength(50),
+                Forms\Components\TextInput::make('atas_nama')
+                    ->label('Atas Nama')
+                    ->maxLength(100),
                 Forms\Components\TextInput::make('no_rekening')
                     ->label('No Rekening')
                     ->required()

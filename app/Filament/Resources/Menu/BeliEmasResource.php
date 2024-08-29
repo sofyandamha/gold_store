@@ -30,7 +30,6 @@ class BeliEmasResource extends Resource
                 //
                 Forms\Components\TextInput::make('no_trans')
                     ->label('No Transaksi')
-
                     ->default('TRX-'.Carbon::now()->format('ymdhs')),
                 Forms\Components\Select::make('customer_id')
                     ->label('Customer')
@@ -51,10 +50,19 @@ class BeliEmasResource extends Resource
                     ->label('Berat')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('kadar_emas')
+                Forms\Components\Select::make('kadar_emas')
                     ->label('Kadar Emas')
-                    ->required()
-                    ->numeric(),
+                    ->default('875')
+                    ->native(false)
+                    ->options([
+                        '99' => '99',
+                        '916' => '916',
+                        '88' => '88',
+                        '875' => '875',
+                        '750' => '750',
+                        '700' => '700',
+                        '420' => '420'
+                    ]),
                 Forms\Components\Select::make('masterharga_id')
                     ->label('Harga Sekarang')
                     ->relationship(
@@ -62,13 +70,15 @@ class BeliEmasResource extends Resource
                         titleAttribute: 'Kategori'
                     )
                     ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->category->kategori} ($record->hrg_beli)")
-
-
                     ->required(),
-                Forms\Components\TextInput::make('keterangan_berat')
+                Forms\Components\Select::make('keterangan_berat')
                     ->label('Keterangan Berat')
-                    ->required()
-                    ->numeric()
+                    ->default('Emas Saja')
+                    ->native(false)
+                    ->options([
+                        'Emas Saja' => 'Emas Saja',
+                        'Permata' => 'Permata',
+                    ])
             ]);
     }
 

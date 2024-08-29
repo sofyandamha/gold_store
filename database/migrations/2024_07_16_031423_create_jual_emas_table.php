@@ -17,10 +17,11 @@ return new class extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('kd_barang');
             $table->integer('discount');
-            $table->string('metode_pembayaran',100);
+            $table->unsignedBigInteger('metode_pembayaran');
             $table->string('bukti_pembayaran',100);
             $table->foreign('customer_id')->references('id')->on('master_customers')->onDelete('cascade');
             $table->foreign('kd_barang')->references('id')->on('master_emas')->onDelete('cascade');
+            $table->foreign('metode_pembayaran')->references('id')->on('master_pembayarans')->onDelete('cascade');
             $table->timestamps();
         });
     }

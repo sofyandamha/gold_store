@@ -9,6 +9,7 @@ use Filament\Resources\Pages\ListRecords;
 class ListMasterHargas extends ListRecords
 {
     protected static string $resource = MasterHargaResource::class;
+    protected static ?string $title = 'Master Harga';
 
     protected function getHeaderActions(): array
     {

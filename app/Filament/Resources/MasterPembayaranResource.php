@@ -35,7 +35,7 @@ class MasterPembayaranResource extends Resource
                     ->label('Tambahan Biaya')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextArea::make('keterangan')
+                Forms\Components\Textarea::make('keterangan')
                     ->label('Keterangan')
                     ->required()
                     ->maxLength(255),

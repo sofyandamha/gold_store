@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('metode_pembayaran',100);
             $table->string('bukti_pembayaran',100);
             $table->decimal('berat', 5, 2);
-            $table->decimal('kadar_emas', 5, 2);
+            $table->integer('kadar_emas');
             $table->unsignedBigInteger('masterharga_id');
-            $table->decimal('keterangan_berat', 5, 2);
+            $table->string('keterangan_berat', 25);
             $table->foreign('customer_id')->references('id')->on('master_customers')->onDelete('cascade');
             $table->foreign('masterharga_id')->references('id')->on('master_hargas')->onDelete('cascade');
             $table->timestamps();

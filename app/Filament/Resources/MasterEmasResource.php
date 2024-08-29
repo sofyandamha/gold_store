@@ -8,6 +8,7 @@ use App\Models\MasterEmas;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Repeater;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -27,33 +28,43 @@ class MasterEmasResource extends Resource
     {
         return $form
             ->schema([
+            //
+                Repeater::make('masteremas')
+                    ->label('Jual Emas')
+                        ->schema([
                 //
-                Forms\Components\TextInput::make('kd_barang')
-                    ->label('Kode Barang')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('nm_barang')
-                    ->label('Nama Barang')
-                    ->required()
-                    ->maxLength(255),
-                Select::make('category_id')
-                    ->label('Kategori')
-                    ->relationship('category', 'kategori')
-                    ->required(),
-                Forms\Components\TextInput::make('berat_modal')
-                    ->label('Berat Modal')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('karat')
-                    ->label('Karat')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('harga_modal')
-                    ->label('Harga Modal')
-                    ->required()
-                    ->numeric()
-                    ->prefix('Rp.'),
-            ]);
+                    Forms\Components\TextInput::make('kd_barang')
+                        ->label('Kode Barang')
+                        ->required()
+                        ->numeric(),
+                    Forms\Components\TextInput::make('nm_barang')
+                        ->label('Nama Barang')
+                        ->required()
+                        ->maxLength(255),
+                    Select::make('category_id')
+                        ->label('Kategori')
+                        ->relationship('category', 'kategori')
+                        ->required(),
+                    Forms\Components\TextInput::make('berat_modal')
+                        ->label('Berat Modal')
+                        ->required()
+                        ->numeric(),
+                    Forms\Components\TextInput::make('karat')
+                        ->label('Karat')
+                        ->required()
+                        ->numeric(),
+                    Forms\Components\TextInput::make('harga_modal')
+                        ->label('Harga Modal')
+                        ->required()
+                        ->numeric()
+                        ->prefix('Rp.'),
+                    ])
+                    ->addActionLabel('Tambah Data')
+                    ->columns(4)
+                    ->columnSpanFull(),
+
+                ]);
+
     }
 
     public static function table(Table $table): Table

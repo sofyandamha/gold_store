@@ -15,12 +15,14 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class ReparasiResource extends Resource
 {
     protected static ?string $model = Reparasi::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Reparasi';
 
     public static function form(Form $form): Form
     {
@@ -30,30 +32,15 @@ class ReparasiResource extends Resource
                 Forms\Components\TextInput::make('no_nota')
                     ->label('Nomor Nota')
                     ->maxLength(255)
-                    ->live(onBlur:true)
-                    // ->rule(static function (Forms\Get $get,Forms\Set $set, Forms\Components\Component $component): Closure {
-                    //     return static function (string $attribute, $value, Closure $fail) use ($get, $set, $component) {
-                    //         $existingCategory = JualEmas::where('no_trans', $get('no_nota'))
-                    //             ->first();
-
-                    //         if ($existingCategory && $existingCategory->getKey() !== $component->getRecord()?->getKey()) {
-                    //             $type = ucwords($get('no_nota'));
-                    //             $fail("Gratis {$type} 1x Cuci");
-                    //             $set('biaya_reparasi', 0);
-                    //         }
-
-                    //     };
-                    // })
-                    // ->afterStateUpdated(function (Forms\Contracts\HasForms $livewire, Forms\Components\TextInput $component) {
-                    //     $livewire->validateOnly($component->getStatePath());
+                    ->default('RPS-'.Carbon::now()->format('ymdhs')),
+                    // ->live(onBlur:true)
+                    // ->afterStateUpdated(function (Forms\Get $get,Forms\Set $set, $state, Forms\Components\TextInput $component) {
+                    //     $no_trans = JualEmas::where('no_trans', $get('no_nota'))->first();
+                    //     $no_nota = Reparasi::where('no_nota', $get('no_nota'))->first();
+                    //     if ($no_trans && !$no_nota) {
+                    //         $set('biaya_reparasi', 0);
+                    //     }
                     // }),
-                    ->afterStateUpdated(function (Forms\Get $get,Forms\Set $set, $state, Forms\Components\TextInput $component) {
-                        $no_trans = JualEmas::where('no_trans', $get('no_nota'))->first();
-                        $no_nota = Reparasi::where('no_nota', $get('no_nota'))->first();
-                        if ($no_trans && !$no_nota) {
-                            $set('biaya_reparasi', 0);
-                        }
-                    }),
                 Forms\Components\Select::make('tipe_reparasi')
                     ->label('Tipe Reparasi')
                     ->options([
