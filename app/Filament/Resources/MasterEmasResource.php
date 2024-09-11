@@ -19,7 +19,7 @@ class MasterEmasResource extends Resource
 {
     protected static ?string $model = MasterEmas::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
     protected static ?string $navigationLabel = 'Emas (Stock)';
 
     protected static ?string $navigationGroup = 'Master';

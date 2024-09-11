@@ -21,7 +21,7 @@ class JualEmasResource extends Resource
 {
     protected static ?string $model = JualEmas::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-scale';
 
     public static function form(Form $form): Form
     {

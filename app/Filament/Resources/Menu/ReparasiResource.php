@@ -21,7 +21,7 @@ class ReparasiResource extends Resource
 {
     protected static ?string $model = Reparasi::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-wrench-screwdriver';
     protected static ?string $navigationLabel = 'Reparasi';
 
     public static function form(Form $form): Form

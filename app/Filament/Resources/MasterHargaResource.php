@@ -17,7 +17,7 @@ class MasterHargaResource extends Resource
 {
     protected static ?string $model = MasterHarga::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
     protected static ?string $navigationLabel = 'Harga';
 
     protected static ?string $navigationGroup = 'Master';

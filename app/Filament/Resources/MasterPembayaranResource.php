@@ -17,7 +17,7 @@ class MasterPembayaranResource extends Resource
 {
     protected static ?string $model = MasterPembayaran::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-credit-card';
     protected static ?string $navigationLabel = 'List Pembayaran';
 
     protected static ?string $navigationGroup = 'Master';

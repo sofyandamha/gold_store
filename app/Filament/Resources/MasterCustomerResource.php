@@ -19,7 +19,7 @@ class MasterCustomerResource extends Resource
 {
     protected static ?string $model = MasterCustomer::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-circle';
 
     protected static ?string $navigationLabel = 'Customer';
 
