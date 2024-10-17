@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
+use App\Models\PembelianBarang;
+use App\Models\PemasukanBarangTransaksi;
+
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 class PemasukanBarang extends Model
@@ -13,30 +17,24 @@ class PemasukanBarang extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category_id',
-        'sub_kategori',
-        'name',
-        'kadar',
-        'berat_bersih',
-        'harga_modal',
+        'no_trans_id',
+        'total_berat_pemasukan',
+        'total_berat_pembelian',
     ];
 
-    public function category(): BelongsTo
+
+    public function beliBarang(): HasMany
     {
-        return $this->belongsTo(Category::class);
+        return $this->HasMany(PembelianBarang::class);
     }
 
-    public static function boot()
+    public function pemasukanbarangTransaksi(): HasMany
     {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (abs($model->berat_bersih - $model->kadar) > 1) {
-                throw ValidationException::withMessages([
-                    'berat_bersih' => 'Selisih antara berat bersih dan kadar tidak boleh lebih dari 1 gram.',
-                ]);
-            }
-        });
+        return $this->HasMany(PemasukanBarangTransaksi::class);
     }
+    // public function category()
+    // {
+    //     return $this->belongsTo(Category::class);
+    // }
 
 }

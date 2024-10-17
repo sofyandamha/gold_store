@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreatePembelianBarang extends CreateRecord
 {
     protected static string $resource = PembelianBarangResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+    }
 }

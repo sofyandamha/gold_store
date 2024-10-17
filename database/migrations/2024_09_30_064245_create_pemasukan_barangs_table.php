@@ -13,13 +13,10 @@ return new class extends Migration
     {
         Schema::create('pemasukan_barangs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('category_id');
-            $table->string('sub_kategori');
-            $table->string('name');
-            $table->decimal('kadar', 11, 3);
-            $table->decimal('berat_bersih', 11, 2);
-            $table->decimal('harga_modal', 18, 2);
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('no_trans_id');
+            $table->decimal('total_berat_pemasukan',11, 3)->nullable();
+            $table->decimal('total_berat_pembelian',11, 3)->nullable();
+            $table->foreign('no_trans_id')->references('id')->on('pembelian_barangs')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -33,7 +33,7 @@ class PembelianBarangResource extends Resource
                     ->native(false),
                     // ->displayFormat('dd/mm/YYYY'),
                 Forms\Components\TextInput::make('berat_real')
-                    ->label('Berat Modal')
+                    ->label('Berat Real')
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('berat_modal')

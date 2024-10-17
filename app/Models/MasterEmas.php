@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
+use App\Models\MasterEmas;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 
 class MasterEmas extends Model
 {
@@ -24,4 +27,11 @@ class MasterEmas extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function masteremas(): HasMany
+    {
+        return $this->HasMany(MasterEmas::class);
+    }
+    // protected $casts = [
+    //     'masteremas' => 'array',
+    // ];
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\MasterCustomer;
 use App\Models\MasterEmas;
 use App\Models\MasterPembayaran;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+// use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class JualEmas extends Model
 {
@@ -21,17 +21,27 @@ class JualEmas extends Model
         'bukti_pembayaran',
     ];
 
-    public function customer(): BelongsTo
+    public function customer()
     {
-        return $this->belongsTo(MasterCustomer::class);
+        return $this->belongsTo(MasterCustomer::class)->select('id', 'nm_customer');
+    }
+    public function masteremas()
+    {
+        return $this->belongsTo(MasterEmas::class)->select('id', 'kd_barang');
     }
 
-    public function masteremas(): BelongsTo
+    // public function customer(): BelongsTo
+    // {
+    //     return $this->belongsTo(MasterCustomer::class);
+    // }
+
+    // public function masteremas(): BelongsTo
+    // {
+    //     return $this->belongsTo(MasterEmas::class);
+    // }
+
+    public function masterpembayarans()
     {
-        return $this->belongsTo(MasterEmas::class);
-    }
-    public function masterpembayarans(): BelongsTo
-    {
-        return $this->belongsTo(MasterPembayaran::class);
+        return $this->belongsTo(MasterPembayaran::class)->select('id', 'metode_bayar');
     }
 }
