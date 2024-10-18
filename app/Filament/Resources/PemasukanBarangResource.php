@@ -101,7 +101,7 @@ class PemasukanBarangResource extends Resource
                                         ->required()->numeric(),
                                     Forms\Components\TextInput::make('berat_bersih')
                                         ->required()
-                                        ->numeric()
+                                        // ->numeric()
                                         ->reactive()
                                         ->rules(['numeric', 'min:0'])
                                         ->afterStateUpdated(function ($state, callable $get, callable $set) {
