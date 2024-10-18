@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('bank', 50);
             $table->string('atas_nama', 100);
             $table->bigInteger('no_rekening')->default(20);
-            $table->bigInteger('point_member')->default(12);
+            $table->bigInteger('point_member')->default(12)->nullable();
             $table->timestamps();
         });
     }

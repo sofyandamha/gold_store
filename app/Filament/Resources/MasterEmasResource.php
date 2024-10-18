@@ -29,9 +29,9 @@ class MasterEmasResource extends Resource
         return $form
             ->schema([
             //
-                Repeater::make('masteremas')
-                    ->label('Jual Emas')
-                        ->schema([
+                // Repeater::make('masteremas')
+                //     ->label('Jual Emas')
+                //         ->schema([
                 //
                     Forms\Components\TextInput::make('kd_barang')
                         ->label('Kode Barang')
@@ -58,12 +58,12 @@ class MasterEmasResource extends Resource
                         ->required()
                         ->numeric()
                         ->prefix('Rp.'),
-                    ])
-                    ->addActionLabel('Tambah Data')
-                    ->columns(4)
-                    ->columnSpanFull(),
+            ]);
+                    // ->addActionLabel('Tambah Data')
+                    // ->columns(4)
+                    // ->columnSpanFull(),
 
-                ]);
+                // ]);
 
     }
 

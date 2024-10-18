@@ -62,10 +62,10 @@ class MasterCustomerResource extends Resource
                     ->label('No Rekening')
                     ->required()
                     ->numeric(),
-                    Forms\Components\TextInput::make('point_member')
-                    ->label('Point Member')
-                    ->required()
-                    ->numeric()
+                // Forms\Components\TextInput::make('point_member')
+                //     ->label('Point Member')
+                //     ->required()
+                //     ->numeric()
             ]);
     }
 

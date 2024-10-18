@@ -15,7 +15,7 @@ class JualEmas extends Model
     protected $fillable = [
         'no_trans',
         'customer_id',
-        'masteremas_id',
+        'kd_barang',
         'discount',
         'metode_pembayaran',
         'bukti_pembayaran',
@@ -27,7 +27,7 @@ class JualEmas extends Model
     }
     public function masteremas()
     {
-        return $this->belongsTo(MasterEmas::class)->select('id', 'kd_barang');
+        return $this->belongsTo(MasterEmas::class,'kd_barang', 'id');
     }
 
     // public function customer(): BelongsTo
@@ -42,6 +42,6 @@ class JualEmas extends Model
 
     public function masterpembayarans()
     {
-        return $this->belongsTo(MasterPembayaran::class)->select('id', 'metode_bayar');
+        return $this->belongsTo(MasterPembayaran::class,'metode_pembayaran','id')->select('id', 'metode_bayar');
     }
 }

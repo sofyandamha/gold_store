@@ -98,10 +98,10 @@ class PemasukanBarangResource extends Resource
                                     Forms\Components\TextInput::make('name')
                                         ->required(),
                                     Forms\Components\TextInput::make('kadar')
-                                        ->required(),
+                                        ->required()->numeric(),
                                     Forms\Components\TextInput::make('berat_bersih')
                                         ->required()
-                                        // ->numeric()
+                                        ->numeric()
                                         ->reactive()
                                         ->rules(['numeric', 'min:0'])
                                         ->afterStateUpdated(function ($state, callable $get, callable $set) {
@@ -118,6 +118,7 @@ class PemasukanBarangResource extends Resource
                                         
                                     Forms\Components\TextInput::make('harga_modal')
                                         ->required()
+                                        ->numeric()
                                         ->rules(['numeric', 'min:0']),
                                 ])
                                 ->columns(2)

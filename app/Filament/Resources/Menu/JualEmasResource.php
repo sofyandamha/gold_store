@@ -28,18 +28,32 @@ class JualEmasResource extends Resource
         return $form
             ->schema([
                 //
-                Repeater::make('jualemas')
-                    ->label('Jual Emas')
-                    ->schema([
+                // Repeater::make('jualemas')
+                //     ->label('Jual Emas')
+                //     ->schema([
                         Forms\Components\TextInput::make('no_trans')
                             ->label('No Transaksi')
                             ->required()
-                            ->default('TRX-'.Carbon::now()->format('ymdhs')),
+                            ->reactive()
+                            ->afterStateUpdated(function ($state, callable $get, callable $set) {
+                                // $totalBerat = PembelianBarang::find($state)->berat_real;
+                                if ($state) {
+                                    $no = JualEmas::orderBy('no_trans', 'desc')->first();
+
+                                    $number = $no ? $no->no_trans + 1 : 0;
+                                    // $mix = Carbon::now()->format('ymd').$number;
+                                    // Set total berat pembelian secara otomatis
+                                    $set('no_trans', (int)$number);
+                                    
+                                    // Reset total berat pemasukan saat memilih transaksi baru
+                                    // $set('error', 'Error'); // Reset untuk menghindari nilai yang tidak diinginkan
+                                }
+                            }),
                         Forms\Components\Select::make('customer_id')
                             ->label('Customer')
                             ->relationship('customer', 'nm_customer')
                             ->required(),
-                        Forms\Components\Select::make('masteremas_id')
+                        Forms\Components\Select::make('kd_barang')
                             ->label('Kode Barang')
                             ->relationship('masteremas', 'kd_barang')
                             ->required(),
@@ -53,10 +67,10 @@ class JualEmasResource extends Resource
                             ->required(),
                         FileUpload::make('bukti_pembayaran')
                             ->label('Bukti Pembayaran'),
-                    ])
-                    ->addActionLabel('Tambah Data')
-                    ->columns(4)
-                    ->columnSpanFull(),
+                    // ])
+                    // ->addActionLabel('Tambah Data')
+                    // ->columns(4)
+                    // ->columnSpanFull(),
 
 
 
