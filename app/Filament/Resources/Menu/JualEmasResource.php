@@ -41,7 +41,8 @@ class JualEmasResource extends Resource
                                     $no = JualEmas::orderBy('no_trans', 'desc')->first();
 
                                     $number = $no ? $no->no_trans + 1 : 0;
-                                    // $mix = Carbon::now()->format('ymd').$number;
+                                    $mix = Carbon::now()->format('ymd').$number;
+                                    dd($mix);
                                     // Set total berat pembelian secara otomatis
                                     $set('no_trans', (int)$number);
                                     

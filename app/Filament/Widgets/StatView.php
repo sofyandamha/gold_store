@@ -5,6 +5,7 @@ namespace App\Filament\Widgets;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use App\Models\BeliEmas;
+use App\Models\PemasukanBarangTransaksi;
 
 class StatView extends BaseWidget
 {
@@ -12,14 +13,13 @@ class StatView extends BaseWidget
 
     protected function getStats(): array
     {
-        $data = BeliEmas::with('masterharga')->first();
-        $beliEmas = $data->masterharga->sum('hrg_beli');
+        // $data = BeliEmas::with('masterharga')->first();
+        // $beliEmas = $data->masterharga->sum('hrg_beli');
+        $pbTransaksi = PemasukanBarangTransaksi::sum('harga_modal');
 
         return [
-            Stat::make('Total Harga Beli Emas :', $beliEmas),
-            // Stat::make('Paid', $payments),
-            // Stat::make('Due', fn () => $dues),
-            // Stat::make('Deposited', $deposits),
+            // Stat::make('Total Harga Beli Emas :', $beliEmas)->icon('heroicon-s-banknotes'),
+            Stat::make('Total Harga Modal (Pemasukan Barang) :', $pbTransaksi),
         ];
     }
 }
